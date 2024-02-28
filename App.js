@@ -11,6 +11,8 @@ import SongEntry from './Components/SongEntry';
 import PlaybackBox from './Components/PlaybackBox';
 import Sound from 'react-native-sound';
 
+var indexPlaying = -1; //-1 indicates nothing is on the playing thing right now
+
 export default function App(){
   const [song, setSong] = useState(null);
 
@@ -39,6 +41,25 @@ export default function App(){
     );
     setSong(replacementSong);
   }
+  function fastForward(){
+    indexPlaying++;
+    if(indexPlaying>=songDatabase.length){
+      indexPlaying=0;
+    }
+    chooseSong(indexPlaying);
+  }
+  function fastBackward(){
+    indexPlaying--;
+    if(indexPlaying<-1){
+      indexPlaying=0;
+    }
+    if(indexPlaying!=-1){
+      chooseSong(indexPlaying);
+    }
+  }
+  function togglePlayback(){
+
+  }
 
   var songs = [];
   for(let i = 0; i<songDatabase.length; i++){
@@ -50,7 +71,7 @@ export default function App(){
       <ScrollView style={style.songList}>
         {songs}
      </ScrollView>
-     <PlaybackBox/>
+     <PlaybackBox fastBackwardFunction={fastBackward} fastForwardFunction={fastForward} playFunction={togglePlayback} songPlaying={song}/>
     </View>
     
 
