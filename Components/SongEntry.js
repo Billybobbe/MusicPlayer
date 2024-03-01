@@ -21,7 +21,7 @@ export default function SongEntry({song, touchFunction}){
                 <Text style={styles.songTitle}>{song[0]}</Text>
                 <Text style={styles.songTime}>{duration + " seconds"}</Text>
             </View>
-            <Text>hello</Text>
+            <Text>Default Album</Text>
         </View>
     );
 }
